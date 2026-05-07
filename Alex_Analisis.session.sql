@@ -71,3 +71,50 @@ VALUES
 ('Library'),
 ('Finance');
 
+
+#STORED PROCEDURE
+
+CREATE PROCEDURE  large_salaraies()
+BEGIN
+  SELECT *
+    FROM employee_salary
+    WHERE salary >= 50000;
+
+CALL o EXEC parks_department.large_salaries() llama todas las que tenga mas de 50000 de salrio
+# CREA UNA FUNCION COMO UN BOTON
+
+
+# USANDO DELIMITER $$ = {}
+
+DELIMITER $$
+CREATE PROCEDURE large_salaries2()
+BEGIN
+  SELECT *
+  FROM employe_salary;
+  WHERE salary >= 50000
+  SELECT *
+  FROM employe_salary;
+  WHERE salary >= 10000;
+END $$ 
+
+CALL large_slaries2()
+
+
+CREATE VIEW grandes_salarios AS
+SELECT * FROM employee_salary WHERE salary >= 50000;
+
+--PARA LLAMAR
+SELECT * FROM grandes_salarios
+-- Y si quieres connectar tienes que usar Attach database por ejemplo
+
+-- PARAMETROS EN SQL
+DELIMITER $$
+CREATE PROCEDURE large_salaries4(parametro INT)
+BEGIN
+  SELECT salary
+  FROM employe_salary;
+  WHERE employee_id = parametro
+END $$ 
+
+CALL large_salaries(1) -- primer id muestra su salario
+
