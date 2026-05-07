@@ -3,9 +3,8 @@
         {
             "previewLimit": 50,
             "driver": "SQLite",
-            "database": "mi_db.db",
-            "name": "mi_db"
+            "name": "Alex_Analisis",
+            "database": "Alex.db"
         }
-    ],
-    "sqltools.useNodeRuntime": true
+    ]
 }
