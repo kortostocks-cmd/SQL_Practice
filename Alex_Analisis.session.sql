@@ -118,3 +118,48 @@ END $$
 
 CALL large_salaries(1) -- primer id muestra su salario
 
+-- TRIGGERS AND EVENTS
+--CUANDO MIS EMPLEADOS EN DEMO SE PONGAN TAMBIEN EN EMPLOYEE SALARY QUE SE PONGA
+SELECT * 
+FROM employee_demographics;
+
+SELECT * 
+FROM employee_salary
+
+DELIMITER $$
+
+CREATE TRIGGER employee_insert
+  AFTER INSERT ON employee_salary
+  FRO EACH ROW
+BEGIN
+  INSERT INTO employee_demographics (employee_id, first_name, last_name)
+  VALUES (NEW.employee_id, NEW.fisrt_name, NEW.last_name);
+END $$
+DELIMITER ;
+
+--TEST 
+INSERT INTO employee_salary (employee_id, first_name, last_name,occupation,salary,dept_id)
+VALUES(13,'jonpaul','seper','ENTRETEIMENT 720 CEO',1000000,NULL);
+-- SI funciona tambien estara en la tabla de demographics el nombre y lo otro y solo falta completarla
+
+
+
+-- EVENTS 
+SELECT *
+FROM employee_demographics;
+
+DELIMITER $$
+CREATE EVENT delete_retirees
+ON SCHEDULE EVERY 30 SECOND
+DO 
+BEGIN
+  DELETE
+  FROM employee_demagraphics
+  WHERE age >= 60;
+END $$
+DELIMITER ;
+
+--CADA VEZ QUE LLEGUE A 60 Años se borra 
+
+SHOW VARIABLES LIKE 'event%';
+-- Mira so el evento esta ON o OFF
